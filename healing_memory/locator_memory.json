@@ -1,0 +1,72 @@
+[
+    {
+        "failed_locator": [
+            "id",
+            "twotabsearchtextbox_wrong"
+        ],
+        "healed_locator": [
+            "id",
+            "twotabsearchtextbox"
+        ]
+    },
+    {
+        "failed_locator": [
+            "id",
+            "challenge-container"
+        ],
+        "healed_locator": [
+            "id",
+            "challenge-container"
+        ]
+    },
+    {
+        "failed_locator": [
+            "id",
+            "challenge-container"
+        ],
+        "healed_locator": [
+            "id",
+            "challenge-container"
+        ]
+    },
+    {
+        "failed_locator": [
+            "id",
+            "challenge-container"
+        ],
+        "healed_locator": [
+            "name",
+            "amzn-r"
+        ]
+    },
+    {
+        "failed_locator": [
+            "id",
+            "amzn-r"
+        ],
+        "healed_locator": [
+            "id",
+            "nav-al-signin"
+        ]
+    },
+    {
+        "failed_locator": [
+            "id",
+            "amzn-r"
+        ],
+        "healed_locator": [
+            "id",
+            "nav-al-signin"
+        ]
+    },
+    {
+        "failed_locator": [
+            "id",
+            "twotabsearchtextbox_wrong"
+        ],
+        "healed_locator": [
+            "id",
+            "twotabsearchtextbox"
+        ]
+    }
+]

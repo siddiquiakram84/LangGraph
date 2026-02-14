@@ -1,0 +1,16 @@
+from memory.vector_store import VectorStore
+
+
+store = VectorStore()
+
+
+def memory_retriever(state):
+
+    dom = state["dom_snapshot"]
+
+    results = store.search(dom)
+
+    return {
+
+        "memory_results": results
+    }
