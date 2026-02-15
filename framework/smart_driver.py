@@ -50,19 +50,28 @@ class SmartDriver:
 
         def execute(locator):
 
-            wait = WebDriverWait(self.driver, 10)
+            wait = WebDriverWait(self.driver, 15)
 
-            element = wait.until(
-
-                EC.presence_of_element_located(locator)
-
-            )
-
+            # ACTION-SPECIFIC WAIT
             if action_name == "click":
+
+                element = wait.until(
+                    EC.element_to_be_clickable(locator)
+                )
+
+                # scroll into view (VERY IMPORTANT for Amazon)
+                self.driver.execute_script(
+                    "arguments[0].scrollIntoView({block:'center'});",
+                    element
+                )
 
                 element.click()
 
             elif action_name == "type":
+
+                element = wait.until(
+                    EC.visibility_of_element_located(locator)
+                )
 
                 text = self._healing_context.get("text")
 
@@ -74,8 +83,13 @@ class SmartDriver:
                     element.send_keys(text)
 
                 else:
-
                     raise Exception(f"Element not typeable: {locator}")
+
+            else:
+
+                element = wait.until(
+                    EC.presence_of_element_located(locator)
+                )
 
         try:
 

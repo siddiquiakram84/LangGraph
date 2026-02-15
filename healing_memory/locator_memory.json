@@ -68,5 +68,145 @@
             "id",
             "twotabsearchtextbox"
         ]
+    },
+    {
+        "failed_locator": [
+            "xpath",
+            "//input[contains(@id,'twotabsearchtextbox_heal')]"
+        ],
+        "healed_locator": [
+            "id",
+            "twotabsearchtextbox"
+        ]
+    },
+    {
+        "failed_locator": [
+            "xpath",
+            "//input[contains(@id,'nav-search-submit-heal')]"
+        ],
+        "healed_locator": [
+            "id",
+            "nav-search-submit-text"
+        ]
+    },
+    {
+        "failed_locator": [
+            "xpath",
+            "(//img[contains(@class,'s-image-heal')])[1]"
+        ],
+        "healed_locator": [
+            "id",
+            "filter-"
+        ]
+    },
+    {
+        "failed_locator": [
+            "xpath",
+            "twotabsearchtextbox"
+        ],
+        "healed_locator": [
+            "id",
+            "twotabsearchtextbox"
+        ]
+    },
+    {
+        "failed_locator": [
+            "xpath",
+            "nav-search-submit-text"
+        ],
+        "healed_locator": [
+            "id",
+            "nav-search-submit-text"
+        ]
+    },
+    {
+        "failed_locator": [
+            "xpath",
+            "filter-"
+        ],
+        "healed_locator": [
+            "id",
+            "filter-"
+        ]
+    },
+    {
+        "failed_locator": [
+            "xpath",
+            "twotabsearchtextbox"
+        ],
+        "healed_locator": [
+            "id",
+            "twotabsearchtextbox"
+        ]
+    },
+    {
+        "failed_locator": [
+            "xpath",
+            "nav-search-submit-text"
+        ],
+        "healed_locator": [
+            "id",
+            "nav-search-submit-text"
+        ]
+    },
+    {
+        "failed_locator": [
+            "xpath",
+            "twotabsearchtextbox"
+        ],
+        "healed_locator": [
+            "id",
+            "twotabsearchtextbox"
+        ]
+    },
+    {
+        "failed_locator": [
+            "xpath",
+            "nav-search-submit-text"
+        ],
+        "healed_locator": [
+            "id",
+            "nav-search-submit-text"
+        ]
+    },
+    {
+        "failed_locator": [
+            "css selector",
+            "img.s-image_random_thing"
+        ],
+        "healed_locator": [
+            "id",
+            "sis_pixel_r2"
+        ]
+    },
+    {
+        "failed_locator": [
+            "xpath",
+            "twotabsearchtextbox"
+        ],
+        "healed_locator": [
+            "id",
+            "twotabsearchtextbox"
+        ]
+    },
+    {
+        "failed_locator": [
+            "xpath",
+            "nav-search-submit-text"
+        ],
+        "healed_locator": [
+            "id",
+            "nav-search-submit-text"
+        ]
+    },
+    {
+        "failed_locator": [
+            "css selector",
+            "sis_pixel_r2"
+        ],
+        "healed_locator": [
+            "id",
+            "sis_pixel_r2"
+        ]
     }
 ]
