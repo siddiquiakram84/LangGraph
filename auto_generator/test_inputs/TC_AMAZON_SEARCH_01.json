@@ -1,0 +1,23 @@
+{
+  "test_case_id": "TC_AMAZON_SEARCH_01",
+  "module": "amazon_search",
+  "base_url": "https://www.amazon.in/",
+  "steps": [
+    {
+      "tc_msg_action": "Enter product name as iphone 15 in search box",
+      "tc_msg_expected": "Product name should be entered in search field"
+    },
+    {
+      "tc_msg_action": "Click on search button",
+      "tc_msg_expected": "Search results page should be displayed"
+    },
+    {
+      "tc_msg_action": "Click on first product from search results",
+      "tc_msg_expected": "Product detail page should open"
+    },
+    {
+      "tc_msg_action": "Click on add to cart button",
+      "tc_msg_expected": "Product should be added to cart"
+    }
+  ]
+}
