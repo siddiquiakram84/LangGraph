@@ -208,5 +208,35 @@
             "id",
             "sis_pixel_r2"
         ]
+    },
+    {
+        "failed_locator": [
+            "id",
+            "twowrong-nametextbox"
+        ],
+        "healed_locator": [
+            "id",
+            "twotabsearchtextbox"
+        ]
+    },
+    {
+        "failed_locator": [
+            "id",
+            "nav-search-complete-button"
+        ],
+        "healed_locator": [
+            "id",
+            "nav-search-submit-button"
+        ]
+    },
+    {
+        "failed_locator": [
+            "id",
+            "akram-siddiqui-chtextbox"
+        ],
+        "healed_locator": [
+            "id",
+            "twotabsearchtextbox"
+        ]
     }
 ]
