@@ -83,7 +83,7 @@ pytest core -q
 
 Copyright (c) 2026 [Akram Siddiqui] (Individual Contractor)
 
-This project is provided under the MIT License. The full license text is included in the `LICENSE` file at the repository root — please replace the placeholder name and year with your information.
+This project is provided under the MIT License. The full license text is included in the `LICENSE` file at the repository root.
 
 Contact
 - Maintainer: [Akram Siddiqui]
