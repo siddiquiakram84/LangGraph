@@ -1,3 +1,7 @@
+from langsmith import traceable
+
+
+@traceable(name="logic-healer")
 def logic_healer(state):
 
     error = state.get("error_message", "")

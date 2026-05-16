@@ -1,10 +1,10 @@
 import json
-from auto_generator.llm_client import OllamaClient
+from auto_generator.llm_client import get_llm_client
 
 
 class IntentExtractor:
     def __init__(self):
-        self.llm = OllamaClient()
+        self.llm = get_llm_client()
 
     def extract_from_step(self, step_text: str) -> dict:
         prompt = f"""

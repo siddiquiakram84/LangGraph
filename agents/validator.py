@@ -1,3 +1,7 @@
+from langsmith import traceable
+
+
+@traceable(name="validator")
 def validator(state):
 
     driver = state["driver"]

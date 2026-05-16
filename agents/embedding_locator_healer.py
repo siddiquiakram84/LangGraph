@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup
+from langsmith import traceable
 from embedding.embedding_engine import EmbeddingEngine
 
 engine = EmbeddingEngine()
@@ -6,6 +7,7 @@ engine = EmbeddingEngine()
 CONFIDENCE_THRESHOLD = 0.7
 
 
+@traceable(name="embedding-locator-healer")
 def embedding_locator_healer(state):
 
     dom = state["dom_snapshot"]
