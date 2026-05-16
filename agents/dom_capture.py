@@ -1,7 +1,9 @@
 import os
 import time
+from langsmith import traceable
 
 
+@traceable(name="dom-capture")
 def dom_capture(state):
 
     driver = state["driver"]

@@ -1,0 +1,68 @@
+version: "3.9"
+
+services:
+
+  unit-tests:
+    build: .
+    environment:
+      - LANGCHAIN_TRACING_V2=false
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+    command: >
+      pytest tests/unit -v --tb=short
+      --alluredir=allure-results/unit
+    volumes:
+      - ./allure-results:/app/allure-results
+      - ./healing_memory:/app/healing_memory
+
+  security-tests:
+    build: .
+    environment:
+      - LANGCHAIN_TRACING_V2=false
+    command: >
+      pytest tests/security -v --tb=short
+      --alluredir=allure-results/security
+    volumes:
+      - ./allure-results:/app/allure-results
+
+  regression-tests:
+    build: .
+    environment:
+      - LANGCHAIN_TRACING_V2=false
+    command: >
+      pytest tests/regression -v --tb=short
+      --alluredir=allure-results/regression
+    volumes:
+      - ./allure-results:/app/allure-results
+
+  ui-tests:
+    build: .
+    environment:
+      - LANGCHAIN_TRACING_V2=${LANGCHAIN_TRACING_V2:-false}
+      - LANGCHAIN_API_KEY=${LANGCHAIN_API_KEY}
+    command: >
+      pytest tests/ui -v --tb=short
+      --alluredir=allure-results/ui
+    volumes:
+      - ./allure-results:/app/allure-results
+      - ./healing_reports:/app/healing_reports
+
+  api-tests:
+    build: .
+    environment:
+      - LANGCHAIN_TRACING_V2=false
+    command: >
+      pytest tests/api -v --tb=short
+      --alluredir=allure-results/api
+    volumes:
+      - ./allure-results:/app/allure-results
+
+  evaluation-tests:
+    build: .
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - LANGCHAIN_TRACING_V2=false
+    command: >
+      pytest tests/evaluation -v --tb=short
+      --alluredir=allure-results/evaluation
+    volumes:
+      - ./allure-results:/app/allure-results

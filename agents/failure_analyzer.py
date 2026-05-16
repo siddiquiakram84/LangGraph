@@ -1,8 +1,10 @@
 """
 agents/failure_analyzer.py
 """
+from langsmith import traceable
 
 
+@traceable(name="failure-analyzer")
 def failure_analyzer(state):
 
     error = state.get("error_message", "")

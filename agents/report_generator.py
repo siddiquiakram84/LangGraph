@@ -1,3 +1,7 @@
+from langsmith import traceable
+
+
+@traceable(name="report-generator")
 def report_generator(state):
 
     report = {

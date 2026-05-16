@@ -1,0 +1,93 @@
+name: Agent Test Suite
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: [main]
+
+jobs:
+  unit-tests:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run unit tests
+        env:
+          LANGCHAIN_TRACING_V2: "false"
+        run: pytest tests/unit -v --tb=short
+
+  security-tests:
+    name: Adversarial / Security Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run adversarial tests
+        env:
+          LANGCHAIN_TRACING_V2: "false"
+        run: pytest tests/security -v --tb=short
+
+  regression-tests:
+    name: Golden Regression Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run regression tests
+        env:
+          LANGCHAIN_TRACING_V2: "false"
+        run: pytest tests/regression -v --tb=short
+
+  integration-tests:
+    name: Graph Integration Tests
+    runs-on: ubuntu-latest
+    needs: [unit-tests, security-tests, regression-tests]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run integration tests
+        env:
+          LANGCHAIN_TRACING_V2: "false"
+        run: pytest tests/integration -v --tb=short
