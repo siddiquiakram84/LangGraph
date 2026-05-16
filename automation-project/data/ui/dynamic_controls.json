@@ -1,0 +1,12 @@
+{
+  "url": "https://the-internet.herokuapp.com/dynamic_controls",
+  "remove_button_text": "Remove",
+  "add_button_text": "Add",
+  "enable_button_text": "Enable",
+  "disable_button_text": "Disable",
+  "loading_text": "Wait for it...",
+  "enabled_message": "It's enabled!",
+  "disabled_message": "It's disabled!",
+  "removed_message": "It's gone!",
+  "added_message": "It's back!"
+}

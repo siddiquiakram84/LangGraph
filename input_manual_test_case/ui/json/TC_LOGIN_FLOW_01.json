@@ -1,0 +1,19 @@
+{
+  "test_case_id": "TC_LOGIN_FLOW_01",
+  "module": "login_page",
+  "base_url": "https://the-internet.herokuapp.com/login",
+  "steps": [
+    {
+      "tc_msg_action": "Enter username tomsmith in the username field",
+      "tc_msg_expected": "Username field should contain tomsmith"
+    },
+    {
+      "tc_msg_action": "Enter password SuperSecretPassword! in the password field",
+      "tc_msg_expected": "Password field should be filled"
+    },
+    {
+      "tc_msg_action": "Click on login button",
+      "tc_msg_expected": "User should be redirected to secure area with success message"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+TEST_CASE_ID: TC_CHECKOUT_FLOW_03
+MODULE: checkout_flow
+BASE_URL: https://the-internet.herokuapp.com
+---
+STEP: Open the home page
+EXPECTED: Home page loads with Welcome heading visible
+---
+STEP: Click on Form Authentication link
+EXPECTED: Login page should open
+---
+STEP: Enter username tomsmith
+EXPECTED: Username field is populated
+---
+STEP: Enter password SuperSecretPassword!
+EXPECTED: Password field is populated
+---
+STEP: Click login button
+EXPECTED: Secure area page opens with logged-in message

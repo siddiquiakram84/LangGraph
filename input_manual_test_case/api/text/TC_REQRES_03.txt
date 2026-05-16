@@ -1,0 +1,15 @@
+TEST_CASE_ID: TC_REQRES_03
+MODULE: reqres_users
+BASE_URL: https://reqres.in/api
+---
+STEP: Send GET request to /users?page=2
+EXPECTED: Response status 200 with page=2 and data list with user objects
+---
+STEP: Send GET request to /users/2
+EXPECTED: Response status 200 with user id=2 and email and first_name fields
+---
+STEP: Send POST request to /users with name and job payload
+EXPECTED: Response status 201 with created user having id and createdAt fields
+---
+STEP: Send PUT request to /users/2 with updated name field
+EXPECTED: Response status 200 with updatedAt field in response

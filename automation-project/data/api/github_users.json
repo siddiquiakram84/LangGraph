@@ -1,0 +1,20 @@
+{
+  "base_url": "https://api.github.com",
+  "test_users": [
+    {
+      "username": "octocat",
+      "expected_login": "octocat",
+      "required_fields": ["id", "login", "avatar_url", "public_repos", "type"]
+    },
+    {
+      "username": "torvalds",
+      "expected_login": "torvalds",
+      "required_fields": ["id", "login", "avatar_url", "public_repos", "type"]
+    }
+  ],
+  "nonexistent_user": "__totally_nonexistent_user_xyz_ai_test__",
+  "search_queries": [
+    {"q": "playwright+language:python", "min_results": 1},
+    {"q": "pytest+language:python",     "min_results": 1}
+  ]
+}

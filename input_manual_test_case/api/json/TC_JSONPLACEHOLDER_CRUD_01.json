@@ -1,0 +1,23 @@
+{
+  "test_case_id": "TC_JSONPLACEHOLDER_CRUD_01",
+  "module": "jsonplaceholder_posts",
+  "base_url": "https://jsonplaceholder.typicode.com",
+  "steps": [
+    {
+      "tc_msg_action": "Send GET request to /posts endpoint",
+      "tc_msg_expected": "Response status 200 and returns a list of posts"
+    },
+    {
+      "tc_msg_action": "Send GET request to /posts/1 endpoint",
+      "tc_msg_expected": "Response status 200 and post has id, title, body, userId fields"
+    },
+    {
+      "tc_msg_action": "Send POST request to /posts with title and body payload",
+      "tc_msg_expected": "Response status 201 and created post has an id"
+    },
+    {
+      "tc_msg_action": "Send DELETE request to /posts/1 endpoint",
+      "tc_msg_expected": "Response status 200 confirming deletion"
+    }
+  ]
+}

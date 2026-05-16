@@ -21,8 +21,8 @@ import numpy as np
 import faiss
 from ai.auto_heal.embedding.embedding_engine import EmbeddingEngine
 
-FAISS_INDEX_PATH = "healing_memory/faiss_script_index.bin"
-FAISS_META_PATH = "healing_memory/faiss_script_meta.pkl"
+FAISS_INDEX_PATH = "ai/memory/faiss_script_index.bin"
+FAISS_META_PATH  = "ai/memory/faiss_script_meta.pkl"
 
 engine = EmbeddingEngine()
 DIMENSION = 384  # all-MiniLM-L6-v2 output dimension
@@ -36,7 +36,7 @@ class FAISSScriptStore:
     """
 
     def __init__(self):
-        os.makedirs("healing_memory", exist_ok=True)
+        os.makedirs("ai/memory", exist_ok=True)
         self.index = self._load_or_create_index()
         self.metadata: list[dict] = self._load_metadata()
 

@@ -9,6 +9,7 @@ Responsibilities:
   4. Writes per-test PDF summary via PDFHelper.
 """
 import sys
+sys.dont_write_bytecode = True
 from pathlib import Path
 
 # Make 'config', 'core', 'pages', 'services', 'utils' importable from tests.

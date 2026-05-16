@@ -1,16 +1,7 @@
-import pytest
-from selenium import webdriver
-
-from src.framework.smart_driver import SmartDriver
-
-
-@pytest.fixture
-def driver():
-
-    raw_driver = webdriver.Chrome()
-
-    driver = SmartDriver(raw_driver)
-
-    yield driver
-
-    driver.quit()
+"""
+Root conftest.py
+Applies project-wide pytest settings. Prevent bytecode generation.
+AI-specific fixtures live in ai/tests/; UI/API fixtures in automation-project/conftest.py.
+"""
+import sys
+sys.dont_write_bytecode = True

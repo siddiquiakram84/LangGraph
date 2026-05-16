@@ -68,13 +68,13 @@
   <div class="grid-4">
     <div class="stat-card">
       <div class="label">Total Tests</div>
-      <div class="value blue">54</div>
-      <div class="sub">AI + UI + API suites</div>
+      <div class="value blue">78</div>
+      <div class="sub">54 AI · 9 UI · 15 API</div>
     </div>
     <div class="stat-card">
       <div class="label">Passed</div>
-      <div class="value green">54</div>
-      <div class="sub">100% pass rate</div>
+      <div class="value green">78</div>
+      <div class="sub">100% pass rate ✓</div>
     </div>
     <div class="stat-card">
       <div class="label">Healing Events</div>
@@ -114,23 +114,24 @@
       </table>
     </div>
     <div class="card">
-      <h2>UI Tests (automation-project/tests/ui/)</h2>
+      <h2>UI Tests (automation-project/tests/ui/) — 9 tests</h2>
       <table>
         <tr><th>Suite</th><th>Tests</th><th>Status</th></tr>
-        <tr><td>Navigation (Home)</td><td>3</td><td><span class="badge badge-blue">CI-READY</span></td></tr>
-        <tr><td>Authentication (Login)</td><td>3</td><td><span class="badge badge-blue">CI-READY</span></td></tr>
-        <tr><td>Network Interception</td><td>1</td><td><span class="badge badge-blue">CI-READY</span></td></tr>
-        <tr><td>Generated (Auto-Gen)</td><td>1</td><td><span class="badge badge-yellow">GENERATED</span></td></tr>
+        <tr><td>Login Flow — Valid</td><td>2</td><td><span class="badge badge-green">PASS</span></td></tr>
+        <tr><td>Login Flow — Invalid</td><td>3</td><td><span class="badge badge-green">PASS</span></td></tr>
+        <tr><td>Dynamic Controls — Checkbox</td><td>2</td><td><span class="badge badge-green">PASS</span></td></tr>
+        <tr><td>Dynamic Controls — Input</td><td>2</td><td><span class="badge badge-green">PASS</span></td></tr>
       </table>
     </div>
     <div class="card">
-      <h2>API Tests (automation-project/tests/api/)</h2>
+      <h2>API Tests (automation-project/tests/api/) — 15 tests</h2>
       <table>
         <tr><th>Suite</th><th>Tests</th><th>Status</th></tr>
-        <tr><td>GitHub User API</td><td>3</td><td><span class="badge badge-blue">CI-READY</span></td></tr>
-        <tr><td>GitHub Search API</td><td>2</td><td><span class="badge badge-blue">CI-READY</span></td></tr>
-        <tr><td>Rate Limit Contract</td><td>1</td><td><span class="badge badge-blue">CI-READY</span></td></tr>
-        <tr><td>Async Parallel Calls</td><td>1</td><td><span class="badge badge-blue">CI-READY</span></td></tr>
+        <tr><td>GitHub User Profile</td><td>4</td><td><span class="badge badge-green">PASS</span></td></tr>
+        <tr><td>GitHub Search</td><td>3</td><td><span class="badge badge-green">PASS</span></td></tr>
+        <tr><td>JSONPlaceholder Read</td><td>4</td><td><span class="badge badge-green">PASS</span></td></tr>
+        <tr><td>JSONPlaceholder Write</td><td>3</td><td><span class="badge badge-green">PASS</span></td></tr>
+        <tr><td>Post Comments</td><td>1</td><td><span class="badge badge-green">PASS</span></td></tr>
       </table>
     </div>
   </div>
@@ -190,8 +191,8 @@
       <tr><td><span class="badge badge-blue">L1</span></td><td>Config</td><td>automation-project/config/</td><td>settings.py + .env</td></tr>
       <tr><td><span class="badge badge-blue">L2</span></td><td>Core</td><td>automation-project/core/</td><td>DriverFactory · WaitHelper</td></tr>
       <tr><td><span class="badge badge-blue">L3</span></td><td>Utils</td><td>automation-project/utils/</td><td>Logger · AllureHelper · ScreenshotHelper · PDFHelper</td></tr>
-      <tr><td><span class="badge badge-blue">L4</span></td><td>Service</td><td>automation-project/services/</td><td>ApiClient → GitHubApiService</td></tr>
-      <tr><td><span class="badge badge-blue">L5</span></td><td>Page Object</td><td>automation-project/pages/</td><td>BasePage → HomePage → SearchResultsPage</td></tr>
+      <tr><td><span class="badge badge-blue">L4</span></td><td>Service</td><td>automation-project/services/</td><td>ApiClient → GitHubApiService · JSONPlaceholderService</td></tr>
+      <tr><td><span class="badge badge-blue">L5</span></td><td>Page Object</td><td>automation-project/pages/</td><td>BasePage → LoginPage · DynamicControlsPage · HomePage</td></tr>
       <tr><td><span class="badge badge-blue">L6</span></td><td>Test</td><td>automation-project/tests/</td><td>ui/ + api/ (.py spec files)</td></tr>
       <tr><td><span class="badge badge-blue">L7</span></td><td>Reporting</td><td>report/</td><td>Allure HTML · Playwright Report · This Dashboard</td></tr>
     </table>
@@ -216,7 +217,7 @@ new Chart(document.getElementById('suiteChart'), {
     labels: ['Unit', 'Security', 'Regression', 'Integration', 'Evaluation', 'UI', 'API'],
     datasets: [{
       label: 'Passed',
-      data: [21, 7, 10, 3, 9, 7, 7],
+      data: [21, 7, 10, 3, 9, 9, 15],
       backgroundColor: 'rgba(99,102,241,0.7)',
       borderRadius: 6,
     }]
@@ -237,7 +238,7 @@ new Chart(document.getElementById('pieChart'), {
   data: {
     labels: ['Passed', 'Failed', 'Skipped'],
     datasets: [{
-      data: [54, 0, 0],
+      data: [78, 0, 0],
       backgroundColor: ['#22c55e', '#ef4444', '#f59e0b'],
       borderWidth: 0,
     }]

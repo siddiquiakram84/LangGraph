@@ -1,0 +1,5 @@
+test_case_id,module,base_url,step_action,step_expected
+TC_GITHUB_USER_02,github_api,https://api.github.com,Send GET request to /users/octocat,Response 200 with login octocat and id and avatar_url fields
+TC_GITHUB_USER_02,github_api,https://api.github.com,Send GET request to /users/octocat/repos,Response 200 with a list containing name and full_name fields
+TC_GITHUB_USER_02,github_api,https://api.github.com,Send GET request to /search/repositories?q=playwright,Response 200 with items list and each item has name field
+TC_GITHUB_USER_02,github_api,https://api.github.com,Send GET request to /rate_limit,Response 200 with rate or resources field in body

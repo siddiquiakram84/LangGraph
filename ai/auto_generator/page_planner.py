@@ -43,9 +43,10 @@ class PagePlanner:
             locators.add(locator_name_key)
 
         return {
-            "page_name": page_name,
+            "page_name":    page_name,
             "locator_file": locator_name,
-            "test_file": test_name,
-            "methods": methods,
-            "locators": list(locators)
+            "test_file":    test_name,
+            "methods":      methods,
+            "locators":     list(locators),
+            "url":          test_case.get("base_url", "https://example.com"),
         }

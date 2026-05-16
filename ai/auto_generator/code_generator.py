@@ -1,110 +1,145 @@
 """
 auto_generator/code_generator.py
 
-Generates Playwright Python POM files from a page blueprint.
-Output: locator file, page object file, pytest test file.
-Uses FileWriter so all output goes to automation-project/src/.../generated/
+Generates 7-layer-compliant Playwright Python POM files from a page blueprint.
+Output: locator file, page object (extends BasePage), class-based pytest test.
+Uses FileWriter so all output goes to automation-project/.../generated/
 """
+import allure
 from ai.auto_generator.file_writer import FileWriter
 
 
 class CodeGenerator:
 
     def __init__(self, blueprint: dict, rag_context: list = None):
-        """
-        blueprint   : dict from PagePlanner.plan()
-        rag_context : list of similar past scripts from FAISSScriptStore (optional)
-        """
         self.bp  = blueprint
         self.ctx = rag_context or []
         self.fw  = FileWriter()
 
     def generate(self) -> dict:
-        """Generate all three files and return written paths."""
-        locator_file  = self._build_locator_file()
-        page_file     = self._build_page_file()
-        test_file     = self._build_test_file()
+        locator_file = self._build_locator_file()
+        page_file    = self._build_page_file()
+        test_file    = self._build_test_file()
 
         return self.fw.write({
-            "locator": (f"{self.bp['locator_file']}.py",  locator_file),
-            "page":    (f"{self.bp['page_name']}.py",     page_file),
-            "test":    (f"{self.bp['test_file']}.py",     test_file),
+            "locator": (f"{self.bp['locator_file']}.py", locator_file),
+            "page":    (f"{self.bp['page_name']}.py",    page_file),
+            "test":    (f"{self.bp['test_file']}.py",    test_file),
         })
 
-    # ── Locator file ────────────────────────────────────────────────────────
+    # ── Locator file ─────────────────────────────────────────────────────────
 
     def _build_locator_file(self) -> str:
         class_name = self._to_class(self.bp["locator_file"])
         lines = [f'class {class_name}:']
         for loc in self.bp["locators"]:
-            # Generate a CSS selector placeholder — human fills real value
-            lines.append(f'    {loc} = ("#TODO_{loc.lower()}",)')
+            const = loc.upper().replace(" ", "_") + "_LOCATOR"
+            lines.append(f'    {const} = "#TODO_{loc.lower()}"')
         return "\n".join(lines) + "\n"
 
     # ── Page object file ─────────────────────────────────────────────────────
 
     def _build_page_file(self) -> str:
-        page_class   = self._to_class(self.bp["page_name"])
-        loc_class    = self._to_class(self.bp["locator_file"])
-        loc_module   = f"locators.generated.{self.bp['locator_file']}"
+        page_class = self._to_class(self.bp["page_name"])
+        loc_class  = self._to_class(self.bp["locator_file"])
+        loc_module = f"locators.generated.{self.bp['locator_file']}"
+        page_url   = self.bp.get("url", "https://example.com")
+
+        rag_banner = ""
+        if self.ctx:
+            src = self.ctx[0]
+            rag_banner = (
+                f"# RAG source: {src.get('description', 'n/a')} "
+                f"(score={src.get('similarity_score', 0):.2f})\n"
+            )
 
         methods = []
         for m in self.bp["methods"]:
-            loc_key = m["field_name"].upper().replace(" ", "_") + "_LOCATOR"
+            loc_const = m["field_name"].upper().replace(" ", "_") + "_LOCATOR"
+            label     = m["field_name"].replace("_", " ").title()
+            m_name    = m["method_name"]
+
             if m["action_type"] == "enter_text":
                 body = (
-                    f'        self.page.locator(self.loc.{loc_key}[0]).fill(value)'
+                    f'        self.fill(self.loc.{loc_const}, value, "{label}")\n'
+                    f'        return self'
                 )
+                sig = f'    @allure.step("{label}")\n'
+                sig += f'    def {m_name}(self, value: str = "") -> "{page_class}":\n'
             else:
                 body = (
-                    f'        self.page.locator(self.loc.{loc_key}[0]).click()'
+                    f'        self.click(self.loc.{loc_const}, "{label}")\n'
+                    f'        return self'
                 )
-            methods.append(
-                f'    def {m["method_name"]}(self, value: str = ""):\n{body}'
-            )
+                sig = f'    @allure.step("{label}")\n'
+                sig += f'    def {m_name}(self) -> "{page_class}":\n'
 
-        rag_comment = ""
-        if self.ctx:
-            rag_comment = (
-                "# RAG context: similar script retrieved from FAISS store\n"
-                f"# Source: {self.ctx[0].get('description', 'n/a')} "
-                f"(score={self.ctx[0].get('similarity_score', 0):.2f})\n\n"
-            )
+            methods.append(sig + body)
+
+        open_method = (
+            f'    @allure.step("Open {page_class}")\n'
+            f'    def open(self) -> "{page_class}":\n'
+            f'        self.navigate(self.URL)\n'
+            f'        return self'
+        )
 
         return (
-            f"{rag_comment}"
-            f"from {loc_module} import {loc_class}\n\n\n"
-            f"class {page_class}:\n\n"
-            f"    def __init__(self, page):\n"
-            f"        self.page = page\n"
-            f"        self.loc  = {loc_class}\n\n"
+            f'"""\nLayer 5 — PAGE OBJECT: {page_class} (auto-generated)\n'
+            f'Generated by AI Auto-Generator. Review TODO locators before running.\n"""\n'
+            f'{rag_banner}'
+            f'import allure\n'
+            f'from playwright.sync_api import Page\n'
+            f'from pages.base_page import BasePage\n'
+            f'from {loc_module} import {loc_class}\n\n\n'
+            f'class {page_class}(BasePage):\n\n'
+            f'    URL = "{page_url}"\n\n'
+            f'    def __init__(self, page: Page):\n'
+            f'        super().__init__(page)\n'
+            f'        self.loc = {loc_class}\n\n'
+            f'{open_method}\n\n'
             + "\n\n".join(methods) + "\n"
         )
 
-    # ── Test file ────────────────────────────────────────────────────────────
+    # ── Test file ─────────────────────────────────────────────────────────────
 
     def _build_test_file(self) -> str:
         page_class  = self._to_class(self.bp["page_name"])
         page_module = f"pages.generated.{self.bp['page_name']}"
-        fixture_var = self.bp["page_name"]
+        test_class  = "Test" + page_class
+        suite_name  = self.bp["page_name"].replace("_", " ").title()
 
-        method_calls = "\n".join(
-            [f'    po.{m["method_name"]}()' for m in self.bp["methods"]]
-        )
+        steps = []
+        for m in self.bp["methods"]:
+            label  = m["field_name"].replace("_", " ").title()
+            m_name = m["method_name"]
+            if m["action_type"] == "enter_text":
+                call = f'            po.{m_name}("")'
+            else:
+                call = f'            po.{m_name}()'
+            steps.append(
+                f'        with allure.step("{label}"):\n{call}'
+            )
+
+        steps_block = "\n\n".join(steps)
 
         return (
-            f"import allure\n"
-            f"import pytest\n"
-            f"from playwright.sync_api import Page\n"
-            f"from {page_module} import {page_class}\n\n\n"
-            f"@allure.suite('Generated — {self.bp['page_name']}')\n"
-            f"@allure.feature('{self.bp['page_name'].replace('_', ' ').title()}')\n"
-            f"def test_{self.bp['page_name']}(page: Page):\n"
-            f"    po = {page_class}(page)\n"
-            f"{method_calls}\n"
+            f'"""\nLayer 6 — TEST: {test_class} (auto-generated)\n'
+            f'Generated by AI Auto-Generator. Review locators before executing.\n"""\n'
+            f'import allure\n'
+            f'import pytest\n'
+            f'from playwright.sync_api import Page\n'
+            f'from {page_module} import {page_class}\n\n\n'
+            f'@allure.suite("Generated — {suite_name}")\n'
+            f'@allure.feature("{suite_name}")\n'
+            f'class {test_class}:\n\n'
+            f'    @allure.story("{suite_name} flow executes successfully")\n'
+            f'    @allure.severity(allure.severity_level.CRITICAL)\n'
+            f'    def test_{self.bp["page_name"]}(self, page: Page):\n'
+            f'        po = {page_class}(page).open()\n\n'
+            f'{steps_block}\n'
         )
 
-    # ── Helpers ──────────────────────────────────────────────────────────────
+    # ── Helpers ───────────────────────────────────────────────────────────────
 
     @staticmethod
     def _to_class(snake: str) -> str:

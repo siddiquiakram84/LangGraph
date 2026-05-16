@@ -1,0 +1,5 @@
+test_case_id,module,base_url,step_action,step_expected
+TC_DYNAMIC_CONTROLS_02,dynamic_controls,https://the-internet.herokuapp.com/dynamic_controls,Click on Remove button to remove checkbox,Checkbox should disappear from the page
+TC_DYNAMIC_CONTROLS_02,dynamic_controls,https://the-internet.herokuapp.com/dynamic_controls,Click on Add button to add checkbox back,Checkbox should reappear on the page
+TC_DYNAMIC_CONTROLS_02,dynamic_controls,https://the-internet.herokuapp.com/dynamic_controls,Click on Enable button to enable the input field,Input field should become active and editable
+TC_DYNAMIC_CONTROLS_02,dynamic_controls,https://the-internet.herokuapp.com/dynamic_controls,Click on Disable button to disable the input field,Input field should become inactive and non-editable
