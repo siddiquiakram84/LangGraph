@@ -1,7 +1,7 @@
 import pytest
 from selenium import webdriver
 
-from framework.smart_driver import SmartDriver
+from src.framework.smart_driver import SmartDriver
 
 
 @pytest.fixture

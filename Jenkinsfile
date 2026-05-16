@@ -41,10 +41,10 @@ pipeline {
                 sh """
                     docker run --rm \\
                         -e LANGCHAIN_TRACING_V2=false \\
-                        -v \$(pwd)/allure-results:/app/allure-results \\
+                        -v \$(pwd)/report/allure/results:/app/report/allure/results \\
                         langgraph-agent-tests:latest \\
-                        pytest tests/unit tests/security tests/regression \\
-                        -v --tb=short --alluredir=allure-results/unit
+                        pytest test/unit test/security test/regression \\
+                        -v --tb=short --alluredir=report/allure/results/unit
                 """
             }
             post {
@@ -64,10 +64,10 @@ pipeline {
                         -e LANGCHAIN_TRACING_V2=true \\
                         -e LANGCHAIN_API_KEY=${LANGCHAIN_API_KEY} \\
                         -e LANGCHAIN_PROJECT=${LANGCHAIN_PROJECT} \\
-                        -v \$(pwd)/allure-results:/app/allure-results \\
-                        -v \$(pwd)/healing_reports:/app/healing_reports \\
+                        -v \$(pwd)/report/allure/results:/app/report/allure/results \\
+                        -v \$(pwd)/report/healing:/app/report/healing \\
                         langgraph-agent-tests:latest \\
-                        pytest tests/ui -v --tb=short --alluredir=allure-results/ui
+                        pytest test/ui -v --tb=short --alluredir=report/allure/results/ui
                 """
             }
         }
@@ -80,9 +80,9 @@ pipeline {
                 sh """
                     docker run --rm \\
                         -e LANGCHAIN_TRACING_V2=false \\
-                        -v \$(pwd)/allure-results:/app/allure-results \\
+                        -v \$(pwd)/report/allure/results:/app/report/allure/results \\
                         langgraph-agent-tests:latest \\
-                        pytest tests/api -v --tb=short --alluredir=allure-results/api
+                        pytest test/api -v --tb=short --alluredir=report/allure/results/api
                 """
             }
         }
@@ -95,9 +95,9 @@ pipeline {
                 sh """
                     docker run --rm \\
                         -e LANGCHAIN_TRACING_V2=false \\
-                        -v \$(pwd)/allure-results:/app/allure-results \\
+                        -v \$(pwd)/report/allure/results:/app/report/allure/results \\
                         langgraph-agent-tests:latest \\
-                        pytest tests/security -v --tb=short --alluredir=allure-results/security
+                        pytest test/security -v --tb=short --alluredir=report/allure/results/security
                 """
             }
         }
@@ -111,16 +111,16 @@ pipeline {
                     docker run --rm \\
                         -e ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY} \\
                         -e LANGCHAIN_TRACING_V2=false \\
-                        -v \$(pwd)/allure-results:/app/allure-results \\
+                        -v \$(pwd)/report/allure/results:/app/report/allure/results \\
                         langgraph-agent-tests:latest \\
-                        pytest tests/evaluation -v --tb=short --alluredir=allure-results/evaluation
+                        pytest test/evaluation -v --tb=short --alluredir=report/allure/results/evaluation
                 """
             }
         }
 
         stage('Generate Allure Report') {
             steps {
-                sh 'allure generate allure-results --clean -o allure-report'
+                sh 'allure generate report/allure/results --clean -o report/allure/html'
             }
         }
 
@@ -133,7 +133,7 @@ pipeline {
                     sh """
                         python analytics/s3_uploader.py \\
                             --bucket ${AWS_S3_BUCKET} \\
-                            --report-dir allure-report \\
+                            --report-dir report/allure/html \\
                             --build-id ${BUILD_NUMBER} \\
                             --region us-east-1
                     """
@@ -146,7 +146,7 @@ pipeline {
         always {
             publishHTML(target: [
                 reportName: 'Allure Report',
-                reportDir: 'allure-report',
+                reportDir: 'report/allure/html',
                 reportFiles: 'index.html',
                 keepAll: true,
                 alwaysLinkToLastBuild: true,

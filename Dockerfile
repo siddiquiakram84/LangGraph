@@ -21,5 +21,5 @@ RUN playwright install chromium --with-deps
 COPY . .
 
 # Default: run unit + security + regression tests
-CMD ["pytest", "tests/unit", "tests/security", "tests/regression", \
-     "-v", "--tb=short", "--alluredir=allure-results"]
+CMD ["pytest", "test/unit", "test/security", "test/regression", \
+     "-v", "--tb=short", "--alluredir=report/allure/results"]

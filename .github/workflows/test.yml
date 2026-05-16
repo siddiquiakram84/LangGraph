@@ -26,7 +26,7 @@ jobs:
       - name: Run unit tests
         env:
           LANGCHAIN_TRACING_V2: "false"
-        run: pytest tests/unit -v --tb=short
+        run: pytest test/unit -v --tb=short
 
   security-tests:
     name: Adversarial / Security Tests
@@ -47,7 +47,7 @@ jobs:
       - name: Run adversarial tests
         env:
           LANGCHAIN_TRACING_V2: "false"
-        run: pytest tests/security -v --tb=short
+        run: pytest test/security -v --tb=short
 
   regression-tests:
     name: Golden Regression Tests
@@ -68,7 +68,7 @@ jobs:
       - name: Run regression tests
         env:
           LANGCHAIN_TRACING_V2: "false"
-        run: pytest tests/regression -v --tb=short
+        run: pytest test/regression -v --tb=short
 
   integration-tests:
     name: Graph Integration Tests
@@ -90,4 +90,4 @@ jobs:
       - name: Run integration tests
         env:
           LANGCHAIN_TRACING_V2: "false"
-        run: pytest tests/integration -v --tb=short
+        run: pytest test/integration -v --tb=short
