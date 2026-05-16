@@ -114,7 +114,7 @@ if __name__ == "__main__":
     parser.add_argument("--bucket", required=True)
     parser.add_argument("--report-dir", required=True)
     parser.add_argument("--build-id", required=True)
-    parser.add_argument("--region", default="ap-south-1")
+    parser.add_argument("--region", default=os.getenv("AWS_DEFAULT_REGION", "us-east-1"))
     args = parser.parse_args()
 
     url = upload_report_to_s3(

@@ -134,7 +134,8 @@ pipeline {
                         python analytics/s3_uploader.py \\
                             --bucket ${AWS_S3_BUCKET} \\
                             --report-dir allure-report \\
-                            --build-id ${BUILD_NUMBER}
+                            --build-id ${BUILD_NUMBER} \\
+                            --region us-east-1
                     """
                 }
             }
