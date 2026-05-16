@@ -31,7 +31,21 @@ def build_healing_graph():
     graph.add_edge("dom_capture", "memory_retriever")
     graph.add_edge("memory_retriever", "embedding_locator_healer")
     graph.add_edge("embedding_locator_healer", "validator")
-    graph.add_edge("validator", "memory_updater")
+
+    def route_after_validation(state):
+        if state.get("validation_success"):
+            return "memory_updater"
+        return "report_generator"
+
+    graph.add_conditional_edges(
+        "validator",
+        route_after_validation,
+        {
+            "memory_updater": "memory_updater",
+            "report_generator": "report_generator",
+        },
+    )
+
     graph.add_edge("memory_updater", "logic_healer")
     graph.add_edge("logic_healer", "report_generator")
 

@@ -3,6 +3,8 @@ from embedding.embedding_engine import EmbeddingEngine
 
 engine = EmbeddingEngine()
 
+CONFIDENCE_THRESHOLD = 0.7
+
 
 def embedding_locator_healer(state):
 
@@ -38,7 +40,7 @@ def embedding_locator_healer(state):
                 best_score = score
                 best_locator = (attr, val)
 
-    if best_locator:
+    if best_locator and best_score >= CONFIDENCE_THRESHOLD:
 
         return {
 
@@ -51,4 +53,13 @@ def embedding_locator_healer(state):
             "success": True
         }
 
-    return {"success": False}
+    return {
+
+        "candidate_locators": candidates,
+
+        "healed_locator": None,
+
+        "confidence_score": best_score,
+
+        "success": False
+    }
