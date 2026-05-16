@@ -28,7 +28,7 @@ def run_pipeline(json_path: str) -> None:
     from ai.auto_generator.intent_extractor import IntentExtractor
     from ai.auto_generator.page_planner import PagePlanner
     from ai.auto_generator.code_generator import CodeGenerator
-    from ai.memory.faiss_store import FAISSScriptStore
+    from ai.auto_heal.memory.faiss_store import FAISSScriptStore
 
     print(f"\n{'='*60}")
     print("  Agentic AI Auto-Gen Pipeline")

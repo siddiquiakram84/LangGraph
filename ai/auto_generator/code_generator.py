@@ -46,7 +46,7 @@ class CodeGenerator:
     def _build_page_file(self) -> str:
         page_class   = self._to_class(self.bp["page_name"])
         loc_class    = self._to_class(self.bp["locator_file"])
-        loc_module   = f"src.locators.generated.{self.bp['locator_file']}"
+        loc_module   = f"locators.generated.{self.bp['locator_file']}"
 
         methods = []
         for m in self.bp["methods"]:
@@ -85,7 +85,7 @@ class CodeGenerator:
 
     def _build_test_file(self) -> str:
         page_class  = self._to_class(self.bp["page_name"])
-        page_module = f"src.pages.generated.{self.bp['page_name']}"
+        page_module = f"pages.generated.{self.bp['page_name']}"
         fixture_var = self.bp["page_name"]
 
         method_calls = "\n".join(

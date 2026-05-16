@@ -14,9 +14,9 @@ from pathlib import Path
 class FileWriter:
 
     def __init__(self):
-        self.pages_dir    = Path("src/pages/generated")
-        self.locators_dir = Path("src/locators/generated")
-        self.tests_dir    = Path("test/ui/generated")
+        self.pages_dir    = Path("automation-project/pages/generated")
+        self.locators_dir = Path("automation-project/locators/generated")
+        self.tests_dir    = Path("automation-project/tests/ui/generated")
 
     def write(self, files: dict) -> dict:
         """

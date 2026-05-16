@@ -1,7 +1,7 @@
 import traceback
 import inspect
 
-from ai.core.healing_engine import HealingEngine
+from ai.auto_heal.core.healing_engine import HealingEngine
 from src.utils.logger import log_healing_report
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
