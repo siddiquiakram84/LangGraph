@@ -97,26 +97,33 @@ class TestExecutor:
             str(self.test_path),
             "-v", "--tb=short", "--no-header",
         ]
-        proc = subprocess.run(
+        proc = subprocess.Popen(
             cmd,
-            capture_output=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
             text=True,
             cwd=str(self.project_root),
         )
+        lines: List[str] = []
+        for line in proc.stdout:
+            print(line, end="", flush=True)
+            lines.append(line)
+        proc.wait()
+        combined = "".join(lines)
         passed = proc.returncode == 0
-        errors = self._parse_errors(proc.stdout + proc.stderr)
+        errors = self._parse_errors(combined)
         return ExecutionResult(
             passed=passed,
             returncode=proc.returncode,
-            stdout=proc.stdout,
-            stderr=proc.stderr,
+            stdout=combined,
+            stderr="",
             errors=errors,
         )
 
     @staticmethod
     def _has_todo_locator_error(output: str) -> bool:
         return bool(re.search(r"#TODO_", output) or
-                    re.search(r"TimeoutError|Locator.*exceeded", output, re.IGNORECASE))
+                    re.search(r"TimeoutError|Locator.*exceeded|has no attribute", output, re.IGNORECASE))
 
     @staticmethod
     def _parse_errors(output: str) -> List[str]:

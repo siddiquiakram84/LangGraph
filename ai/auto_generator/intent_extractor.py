@@ -13,19 +13,23 @@ class IntentExtractor:
 
     def extract_from_step(self, step_text: str) -> dict:
         prompt = f"""
-You are an automation intent extractor.
+You are an automation intent extractor for UI test steps.
 
-Return ONLY valid JSON.
-Do NOT explain.
-Do NOT return code.
-Do NOT add markdown.
+Return ONLY valid JSON. No explanation, no markdown, no code blocks.
 
-Format strictly like this:
+Strict format:
 {{
-  "action_type": "",
-  "field_name": "",
-  "value": ""
+  "action_type": "<enter_text or click>",
+  "field_name": "<short snake_case element name>",
+  "value": "<text to type, or empty string>"
 }}
+
+Rules:
+- action_type MUST be exactly "enter_text" (filling an input) or "click" (pressing a button/link)
+- field_name MUST be a short snake_case word: username, password, login_button, search_box
+- NEVER add "_locator" or "_field" or "_input" to field_name
+- value: the text to type for enter_text, empty string "" for click actions
+- Navigate/open/go to steps: treat as "click" on the page link element
 
 Sentence:
 {step_text}

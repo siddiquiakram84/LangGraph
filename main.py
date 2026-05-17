@@ -106,6 +106,9 @@ def run_pipeline(file_path: str) -> None:
         print("\n[7/10] GATE: AI validation failed — generating failure report...")
         report_path = reporter.report(validation, execution=None)
         print(f"\n  Report: {report_path}")
+        from ai.auto_generator.dashboard_updater import update_dashboard
+        dash_path = update_dashboard()
+        print(f"  Dashboard: {dash_path}")
         sys.exit(2)
 
     print("\n[7/10] GATE: AI validation passed — proceeding to execution")
@@ -127,7 +130,7 @@ def run_pipeline(file_path: str) -> None:
     status = "PASS" if execution.passed else "FAIL"
     print(f"       Execution: {status} (attempts={execution.attempts})")
 
-    # ── Step 10: Final report + store in FAISS ────────────────────────────────
+    # ── Step 10: Final report + store in FAISS + update dashboard ───────────────
     print("\n[10/10] Writing pipeline report...")
     report_path = reporter.report(validation, execution)
     print(f"        Report: {report_path}")
@@ -141,6 +144,10 @@ def run_pipeline(file_path: str) -> None:
             script_type="ui",
         )
         print(f"        Stored in FAISS. Total scripts: {store.count()}")
+
+    from ai.auto_generator.dashboard_updater import update_dashboard
+    dash_path = update_dashboard()
+    print(f"        Dashboard: {dash_path}")
 
 
 def run_all(directory: Path = INPUT_ROOT) -> None:
