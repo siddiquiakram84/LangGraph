@@ -9,7 +9,6 @@ DeepEval measures:
   - Toxicity            — is the output safe?
   - Bias                — does the output show bias?
 
-Interview talking point:
   "RAGAS evaluates the RAG pipeline — retrieval quality, context usage.
   DeepEval evaluates the LLM output quality — correctness, hallucination,
   bias. I run both as quality gates before promoting a model or prompt change."

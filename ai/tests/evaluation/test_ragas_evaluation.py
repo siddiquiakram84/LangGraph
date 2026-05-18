@@ -8,7 +8,6 @@ RAGAS measures 3 things:
   2. Answer Relevancy  — is the answer relevant to the question?
   3. Context Recall    — did retrieval fetch the right documents?
 
-Interview talking point:
   "I use RAGAS as a quality gate on the RAG pipeline. After any change to
   the embedding model, retrieval strategy, or prompt — I run RAGAS on a
   fixed evaluation dataset and assert that scores stay above threshold.
