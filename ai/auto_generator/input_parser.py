@@ -181,6 +181,18 @@ class InputParser:
                     "tc_msg_expected": expect_m.group(1).strip() if expect_m else "",
                 })
 
+        # Fallback: free-form file — treat each non-empty, non-header line as a step
+        if not steps:
+            header_keys = {"test_case_id", "module", "base_url"}
+            for line in text.splitlines():
+                line = line.strip()
+                if not line:
+                    continue
+                key = line.split(":")[0].strip().lower()
+                if key in header_keys or line.startswith("---"):
+                    continue
+                steps.append({"tc_msg_action": line, "tc_msg_expected": ""})
+
         return {
             "test_case_id": meta.get("test_case_id", path.stem),
             "module":       meta.get("module",        path.stem),

@@ -60,7 +60,7 @@
   <h1>LangGraph AI Test Analytics</h1>
   <span>Agentic Framework Dashboard</span>
   <span>Auto-updated after each pipeline run</span>
-  <span style="margin-left:auto">2026-05-17 18:13 UTC</span>
+  <span style="margin-left:auto">2026-05-20 10:08 UTC</span>
 </header>
 
 <main>
@@ -71,13 +71,13 @@
 <div class="grid-4">
   <div class="stat-card">
     <div class="label">Total Pipeline Runs</div>
-    <div class="value blue">4</div>
+    <div class="value blue">7</div>
     <div class="sub">since project start</div>
   </div>
   <div class="stat-card">
     <div class="label">Execution Passed</div>
     <div class="value green">2</div>
-    <div class="sub">50% success rate</div>
+    <div class="sub">29% success rate</div>
   </div>
   <div class="stat-card">
     <div class="label">Auto-Heal Events</div>
@@ -86,8 +86,8 @@
   </div>
   <div class="stat-card">
     <div class="label">Gate Blocked / Failed</div>
-    <div class="value red">2</div>
-    <div class="sub">1 gate-blocked · 1 exec-failed</div>
+    <div class="value red">5</div>
+    <div class="sub">1 gate-blocked · 4 exec-failed</div>
   </div>
 </div>
 
@@ -108,6 +108,9 @@
 <tr><td style='color:var(--muted);font-size:.78rem'>2026-05-17 18:07</td><td style='font-size:.82rem'>TC_HEROKUAPP_LOGIN_LIVE_05</td><td><span class='badge badge-blue'>login_demo</span></td><td><span class='badge badge-green'>PASS 11/11</span></td><td><span class='badge badge-green'>PASS</span></td><td style='text-align:center;color:var(--yellow)'>✓</td><td style='text-align:center'>2</td></tr>
 <tr><td style='color:var(--muted);font-size:.78rem'>2026-05-17 18:03</td><td style='font-size:.82rem'>TC_HEROKUAPP_LOGIN_LIVE_05</td><td><span class='badge badge-blue'>login_demo</span></td><td><span class='badge badge-green'>PASS 11/11</span></td><td><span class='badge badge-red'>FAIL</span></td><td style='text-align:center;color:var(--yellow)'>—</td><td style='text-align:center'>1</td></tr>
 <tr><td style='color:var(--muted);font-size:.78rem'>2026-05-17 17:59</td><td style='font-size:.82rem'>TC_HEROKUAPP_LOGIN_LIVE_05</td><td><span class='badge badge-blue'>login_demo</span></td><td><span class='badge badge-red'>FAIL 5/11</span></td><td><span class='badge badge-yellow'>SKIPPED</span></td><td style='text-align:center;color:var(--yellow)'>—</td><td style='text-align:center'>—</td></tr>
+<tr><td style='color:var(--muted);font-size:.78rem'>2026-05-20 10:08</td><td style='font-size:.82rem'>TC_CHECKOUT_FLOW_03</td><td><span class='badge badge-blue'>TC_CHECKOUT_FLOW_03</span></td><td><span class='badge badge-green'>PASS 9/11</span></td><td><span class='badge badge-red'>FAIL</span></td><td style='text-align:center;color:var(--yellow)'>—</td><td style='text-align:center'>1</td></tr>
+<tr><td style='color:var(--muted);font-size:.78rem'>2026-05-20 10:05</td><td style='font-size:.82rem'>TC_CHECKOUT_FLOW_03</td><td><span class='badge badge-blue'>TC_CHECKOUT_FLOW_03</span></td><td><span class='badge badge-green'>PASS 9/11</span></td><td><span class='badge badge-red'>FAIL</span></td><td style='text-align:center;color:var(--yellow)'>—</td><td style='text-align:center'>1</td></tr>
+<tr><td style='color:var(--muted);font-size:.78rem'>2026-05-18 12:32</td><td style='font-size:.82rem'>TC_CHECKOUT_FLOW_03</td><td><span class='badge badge-blue'>TC_CHECKOUT_FLOW_03</span></td><td><span class='badge badge-green'>PASS 9/11</span></td><td><span class='badge badge-red'>FAIL</span></td><td style='text-align:center;color:var(--yellow)'>—</td><td style='text-align:center'>1</td></tr>
   </table>
 </div>
 
@@ -261,10 +264,10 @@
 </main>
 
 <script>
-const runLabels = ["OKUAPP_LOGIN_LIVE_05", "OKUAPP_LOGIN_LIVE_05", "OKUAPP_LOGIN_LIVE_05", "OKUAPP_LOGIN_LIVE_05"];
-const gateScores = [5, 11, 11, 10];
-const execPass = [0, 0, 1, 1];
-const healEvents = [0, 0, 1, 1];
+const runLabels = ["TC_CHECKOUT_FLOW_03", "TC_CHECKOUT_FLOW_03", "TC_CHECKOUT_FLOW_03", "OKUAPP_LOGIN_LIVE_05", "OKUAPP_LOGIN_LIVE_05", "OKUAPP_LOGIN_LIVE_05", "OKUAPP_LOGIN_LIVE_05"];
+const gateScores = [9, 9, 9, 5, 11, 11, 10];
+const execPass = [0, 0, 0, 0, 0, 1, 1];
+const healEvents = [0, 0, 0, 0, 0, 1, 1];
 
 
 // ── Pipeline gate score chart ──────────────────────────────────

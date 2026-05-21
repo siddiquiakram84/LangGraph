@@ -33,9 +33,10 @@ class CodeGenerator:
         class_name = self._to_class(self.bp["locator_file"])
         lines = [f'class {class_name}:']
         for loc in self.bp["locators"]:
-            # loc is already "USERNAME_LOCATOR" from PagePlanner — use as-is
-            todo_name = loc.lower().replace("_locator", "")  # strip suffix for #TODO_ name
+            todo_name = loc.lower().replace("_locator", "")
             lines.append(f'    {loc} = "#TODO_{todo_name}"')
+        if len(lines) == 1:
+            lines.append("    pass")
         return "\n".join(lines) + "\n"
 
     # ── Page object file ─────────────────────────────────────────────────────
